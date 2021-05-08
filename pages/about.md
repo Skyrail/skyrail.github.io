@@ -4,13 +4,16 @@ title: About
 permalink: /about/
 ---
 
-Jekyll Paper is a simple Jekyll theme, and it is aim to helping you to create your own blog by the easiest way.
+Hey, I’m Aled.
 
-You can find more information in [Jekyll Paper][jekyll-paper] or [Jekyll Paper for Github][jekyll-paper-github]. If you have any questions or suggestions, you can contact me in [Jekyll Paper Issues][jekyll-paper-issues], [Jekyll Paper for Github Issues][jekyll-paper-github-issues] or send email to [me](mailto:i@ghosind.com). 
+This is my technical reference blog. I use it as a simple documentation tool and scratch pad to place links and snippets of code for future reference.
 
-Wish you enjoying your blog life!
+I the technical manager at Audacious Church in Manchester, primarly looking after the AVL systems alongside general network and computer management.
 
-[jekyll-paper]: https://github.com/ghosind/Jekyll-Paper
-[jekyll-paper-github]: https://github.com/ghosind/Jekyll-Paper-Github
-[jekyll-paper-issues]: https://github.com/ghosind/Jekyll-Paper/issues
-[jekyll-paper-github-issues]: https://github.com/ghosind/Jekyll-Paper-Github/issues
+I have previously worked as a web developer at UKFast Ltd. and SenseLogix Ltd.
+
+I work with whatever is needed to get the job done although my core tools are PHP and JavaScript.
+
+I enjoy spending time with my family and friends, reading non-fiction and sci-fi books, listening to music, and when I do get out, photography.
+
+I hope you find useful what you find here, and maybe even enjoy it.
