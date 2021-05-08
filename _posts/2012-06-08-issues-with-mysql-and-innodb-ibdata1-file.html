@@ -1,0 +1,32 @@
+---
+layout: post
+title: Issues with MySQL and InnoDB ibdata1 file
+date: 2012-06-08 00:27:01.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Linux
+- SQL
+tags:
+- linux
+- mysql
+- sql
+meta:
+  _edit_last: '517855'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/06/08/issues-with-mysql-and-innodb-ibdata1-file/"
+---
+<p>So as of the past hour the X-Media Online websites have ground to a halt and can't be accessed, after being alerted of the issue I quickly went to investigate. My first port of call is usually to /var/log because I'm ashamed to admit I've let some log files get out of hand before. But this time (thankfully) that wasn't the problem (I'd fixed those issues, hopefully).</p>
+<p>This time the issue seems to be in /var/lib/mysql where the ibdata1 file has grown to about 20GB in size which is just shy of the max size of the partition that it's on.</p>
+<p>I'm currently in the process of fixing it and will give updates as I go through the process of fixing it. I'm using both <a href="http://stackoverflow.com/questions/3456159/how-to-shrink-purge-ibdata1-file-in-mysql">this Stackoverflow post</a> and <a href="http://dev.mysql.com/doc/refman/5.5/en/innodb-data-log-reconfiguration.html">this MySQL documentation</a>. I'm at step one, currently creating a dump of the entire database. I'll keep you updated as I go.</p>
+<p><strong>Update:</strong> No update on the fixing yet, but I've determined the root of the problem to be the old X-Media Online wiki which must be open to editing. There are over 17 million records in the wiki text table making up 19.7GB of the 20GB InnoDB file. A lot of mistakes to learn from at this early hour of the morning (it's 2:40am here right now).</p>
+<p><strong>Update 2:</strong> Dropped the old wiki database, cleared up the ibdata1 using the <a href="http://dev.mysql.com/doc/refman/5.5/en/innodb-data-log-reconfiguration.html">following documentation</a> but not before reconfiguring InnoDB to use multiple table spaces as per <a href="http://dev.mysql.com/doc/refman/5.5/en/innodb-multiple-tablespaces.html">this documentation</a>.</p>
+<p><strong>Update 3:</strong> <a href="http://bugs.mysql.com/bug.php?id=1341">Bug mentioning the issue</a> for future reference.</p>

@@ -1,0 +1,27 @@
+---
+layout: post
+title: PHP Type Casting
+date: 2011-09-20 12:24:45.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- PHP
+- Programming
+tags: []
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2011-09-20
+    12:24:45";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2011/09/20/php-type-casting/"
+---
+<p>In PHP, because variables aren't given definitive data types PHP will do conversions on the fly. This can lead to some unusual quirks. Recently I was using the round() function to round the decimals after a number. For some reason the function returned a whole number without the decimals. After a bit of digging around, it turned out I was passing an object into round() and so PHP must have been converting it to an integer before rounding. My quick fix was to type cast the variable like so:</p>
+<p><code>$roundedValue = round( (float)$value, 2 );</code></p>

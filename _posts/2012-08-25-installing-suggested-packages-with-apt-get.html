@@ -1,0 +1,31 @@
+---
+layout: post
+title: Installing suggested packages with apt-get
+date: 2012-08-25 11:14:34.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Linux
+- Operating Systems
+tags:
+- linux
+- system administration
+- ubuntu
+meta:
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2012-08-25
+    11:14:34";}
+  _edit_last: '517855'
+  geo_public: '0'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/08/25/installing-suggested-packages-with-apt-get/"
+---
+<p>Every so often there will be a list of 'suggested packages' when you try and install something with apt-get. By default they're not installed which can save installing a lot of stuff you don't really need. Sometimes however you may want to install the suggested packages, I found the '<code>--install-suggests</code>' does just that and can be used as follows:</p>
+<pre>apt-get install &lt;package-name&gt; --install-suggests</pre>

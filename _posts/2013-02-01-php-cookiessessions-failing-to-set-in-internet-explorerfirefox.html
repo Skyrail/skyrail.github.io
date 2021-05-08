@@ -1,0 +1,34 @@
+---
+layout: post
+title: PHP Cookies/Sessions failing to set in Internet Explorer/Firefox
+date: 2013-02-01 14:26:43.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- PHP
+- Programming
+tags:
+- php
+meta:
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2013-02-01
+    14:26:43";}
+  _publicize_pending: '1'
+  _edit_last: '517855'
+  _wpas_skip_facebook: '1'
+  _wpas_skip_google_plus: '1'
+  _wpas_skip_twitter: '1'
+  _wpas_skip_linkedin: '1'
+  _wpas_skip_tumblr: '1'
+  _wpas_skip_path: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2013/02/01/php-cookiessessions-failing-to-set-in-internet-explorerfirefox/"
+---
+<p>I discovered while testing a locally hosted site that in Chrome my sessions were working correctly but in the IE and Firefox my session cookies were failing to be set. After some research I discovered that IE/FF were having trouble with the domain of which the cookie was set to use. I'd forgotten that a while back I'd changed PHP's 'cookie_domain' to a specific domain to allow me to test sub-domains and such, this meant that IE and FF were failing to accept the cookie whereas Chrome was a little more accepting for cookies it figured were from localhost. All is needed is for you to set the 'cookie_domain' in the php.ini to 'false', 'null' or '' in order to accept cookies from localhost correctly. See http://www.php.net/manual/en/session.configuration.php#ini.session.cookie-domain for more information.</p>

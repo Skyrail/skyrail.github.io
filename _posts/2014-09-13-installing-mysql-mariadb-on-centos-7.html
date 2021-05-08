@@ -1,0 +1,59 @@
+---
+layout: post
+title: Installing MySQL (MariaDB) on CentOS 7
+date: 2014-09-13 12:17:41.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- An Introduction to
+- Databases
+tags:
+- centos
+- mariadb
+- mysql
+meta:
+  _publicize_pending: '1'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _wpas_skip_facebook: '1'
+  _wpas_skip_google_plus: '1'
+  _wpas_skip_twitter: '1'
+  _wpas_skip_linkedin: '1'
+  _wpas_skip_tumblr: '1'
+  _wpas_skip_path: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2014/09/13/installing-mysql-mariadb-on-centos-7/"
+---
+<p>On CentOS 7 the MySQL packages have been replaced with the community developed MariaDB packages which are drop in replacements to the MySQL counterparts.</p>
+<p>So first thing's first, install MariaDB:</p>
+<pre>[root@mail ~]# yum -y install mariadb-server mariadb</pre>
+<p>The <code>-y</code> means yum will automatically answer yes to any questions,<br />
+<code>mariadb-server</code> the server package and <code>mariadb</code> is the client package.</p>
+<p>Next enable the MariaDB service and start it up using systemctl:</p>
+<pre>[root@mail ~]# systemctl enable mariadb
+...
+[root@mail ~]# systemctl start mariadb</pre>
+<p>The next step is optional but recommended, run the <code>mysql_secure_installation</code> command to improve the security of the installation:</p>
+<pre>[root@mail ~]# mysql_secure_installation</pre>
+<p>I won't run through each of the steps in there but it will ask you if you want to set a root password, remove anonymous users, disallow root login remotely and then remove the test database. This should close down some of the more open aspects of a MariaDB installation.</p>
+<p>You can that test that you've got access by logging into MariaDB using the root password you set in the mysql_secure_installation (or blank if you haven't set one):</p>
+<pre>[root@mail ~]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 5.5.37-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2014, Oracle, Monty Program Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]&gt;</pre>
+<p>Note that the mysql commands are still used and that MariaDB works like MySQL despite it providing a MariaDB prompt.</p>

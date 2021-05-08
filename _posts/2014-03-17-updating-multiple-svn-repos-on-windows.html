@@ -1,0 +1,32 @@
+---
+layout: post
+title: Updating multiple SVN repos on Windows
+date: 2014-03-17 16:05:02.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- General
+tags:
+- powershell
+- svn
+- windows
+meta:
+  _publicize_pending: '1'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2014/03/17/updating-multiple-svn-repos-on-windows/"
+---
+<p>Through the course of my work here I've accumulated a number of SVN repos that I need to keep up to date on a regular basis. To do so manually is a bit faffy, and multi-selecting repos and updating using TortoiseSVN threw up strange errors where the repos would all try and update to the same revision number (not what I wanted.) To fix it I've opted to using this one line in PowerShell:</p>
+<pre>Get-ChildItem -Force */.svn | ForEach { svn update $_.Parent.FullName }</pre>
+<p>All this does is list all of the folders which have .svn folders in them (the -Force causes it to find any hidden folders) and then runs an SVN update on them. Simple, but effective. Any conflicts I then deal with in TortoiseSVN later.</p>
+<p>It can be tweaked and changed as needed, expanded etc. but for me it's all I needed to get it working on Windows.</p>
+<p> </p>

@@ -1,0 +1,30 @@
+---
+layout: post
+title: Connecting to two networks, one with and one without internet on Windows 7
+date: 2011-10-02 12:35:19.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Operating Systems
+- Windows
+tags: []
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:58:"http://skyrail.files.wordpress.com/2011/10/metrichowto.png";s:6:"images";a:2:{s:57:"http://skyrail.files.wordpress.com/2011/10/routeprint.png";a:6:{s:8:"file_url";s:57:"http://skyrail.files.wordpress.com/2011/10/routeprint.png";s:5:"width";s:3:"730";s:6:"height";s:3:"900";s:4:"type";s:5:"image";s:4:"area";s:6:"657000";s:9:"file_path";s:0:"";}s:58:"http://skyrail.files.wordpress.com/2011/10/metrichowto.png";a:6:{s:8:"file_url";s:58:"http://skyrail.files.wordpress.com/2011/10/metrichowto.png";s:5:"width";s:4:"1290";s:6:"height";s:3:"710";s:4:"type";s:5:"image";s:4:"area";s:6:"915900";s:9:"file_path";s:0:"";}}s:6:"videos";a:0:{}s:11:"image_count";s:1:"2";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2011-10-02
+    12:35:19";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2011/10/02/connecting-to-two-networks-one-with-and-one-without-internet-on-windows-7/"
+---
+<p>Recently I've obtained a Netgear wireless router. As it's a spare I'm going to install <a href="http://openwrt.org">OpenWRT </a>on it. I'm not going to use it as my main router and so I want to use another router for my internet access. After plugging the new router in and trying to connect to the internet, I realised that Windows favoured the new router over the old wireless connection for some reason.</p>
+<p>After a bit of searching I found out that it might be something to do with the 'metric' or the connections. The lower the metric, the greater precedence the connection has over the others. Typing in <code>route print</code> into the command prompt gave me the following:</p>
+<p><a href="http://skyrail.files.wordpress.com/2011/10/routeprint.png"><img class="aligncenter size-medium wp-image-232" title="routeprint" src="{{ site.baseurl }}/assets/2011/10/routeprint.png?w=243" alt="" width="243" height="300" /></a></p>
+<p>I've highlighted the two lines of importance, also note that the second router has a different subnet from the original router. As you may notice, the new router (192.168.1.1) has a much lower metric, and is being used my Windows to try and connect to the internet. To fix this I went into the properties of the adapter and increased the metric to my liking, as shown below:</p>
+<p><a href="http://skyrail.files.wordpress.com/2011/10/metrichowto.png"><img class="aligncenter size-medium wp-image-233" title="metrichowto" src="{{ site.baseurl }}/assets/2011/10/metrichowto.png?w=300" alt="" width="300" height="165" /></a>Windows then used the old wireless connection for the internet yet I could still connect to the new router using it's IP.</p>

@@ -1,0 +1,28 @@
+---
+layout: post
+title: Comparing two commits in Git
+date: 2012-07-26 09:48:45.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- General
+- Programming
+tags:
+- git
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2012-07-26
+    09:48:45";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/07/26/comparing-two-commits-in-git/"
+---
+<p>Whenever I push a release I'm required to provide a list of all the files I've changed. As I'm using Git personally I can easily compare the initial import (or last release/import) with the version that I am pushing for release. The simple way of doing this is displayed in the answers in <a href="http://stackoverflow.com/questions/1552340/git-show-all-changed-files-between-two-commits">this Stackoverflow question</a>. For quick reference the line is as follows:</p>
+<p><code>git diff --name-only SHA1 SHA2</code></p>

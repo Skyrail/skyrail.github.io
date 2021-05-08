@@ -1,0 +1,31 @@
+---
+layout: post
+title: 'Chrome user agent stylesheet box-sizing: border-box vs content-box'
+date: 2014-06-24 09:39:51.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Web Development
+tags:
+- Browsers
+- css
+- html
+meta:
+  _edit_last: '517855'
+  geo_public: '0'
+  _publicize_pending: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2014/06/24/chrome-user-agent-stylesheet-box-sizing-border-box-vs-content-box/"
+---
+<p>While developing a new function on part of the company's control panel I noticed the heights and widths of the input boxes to be marginally different from the exact same inputs on another page. Using Chrome's web inspector I discovered that all the set padding, heights, margins and borders were the same, but the computed output to be different. </p>
+<p>[caption id="attachment_436" align="aligncenter" width="717"]<a href="https://skyrail.files.wordpress.com/2014/06/box-sizing-differences.png"><img src="{{ site.baseurl }}/assets/2014/06/box-sizing-differences.png" alt="Notice how the overall height of the left one (height + padding + border) matches the height of the right." width="717" height="263" class="size-full wp-image-436" /></a> Notice how the overall height of the left one (height + padding + border) matches the height of the right.[/caption]</p>
+<p>The difference is minor, but I noticed that the overall height (height + padding + border) matched just the height of the 'correct' one. This reminded me of the differences between box-sizing in browsers: border-box vs content-box (see <a href="http://quirksmode.org/css/user-interface/boxsizing.html">QuirksMode explanation</a>).</p>
+<p>The thing is, I hadn't set the box-sizing, and it wasn't being set in any of our style sheets; it was coming from the user agent stylesheet. After a little Googling I came across <a href="http://stackoverflow.com/questions/7534222/what-causes-the-user-agent-stylesheet-to-use-border-box-instead-of-content">this post on Stackoverflow</a>. This suggested that the issue arose from outputting content before the DOCTYPE, and that was the issue, the DOCTYPE was missing from the output as I was outputting some debugging text before it. As soon as I removed that all the styling was back to normal.</p>

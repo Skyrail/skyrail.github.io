@@ -1,0 +1,32 @@
+---
+layout: post
+title: Diff Merge and TortoiseSVN
+date: 2011-08-11 08:11:57.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- General
+- Programming
+tags: []
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2011-08-11
+    08:11:57";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2011/08/11/diff-merge-and-tortoisesvn/"
+---
+<p>I wasn't particularly happy with TortoiseSVN's diff and merge tool so I decided to look for an external tool. I came across <a href="http://www.sourcegear.com/diffmerge/">DiffMerge </a>from SourceGear, a maker of another version control system.  Here's a howto with how to use DiffMerge with TortoiseSVN as taken from <a href="http://www.joechin.com/movabletype/archives/000127.html">here</a> (copied for readability reasons):</p>
+<blockquote><p>By default tortoise installs its own diffviewer, tortoisemerge, for viewing and modifying changes. I prefer another. Sourcegear <a href="http://www.sourcegear.com/diffmerge/index.html">diffmerge</a> provides a better user experience and the text is a lot easier to follow. To set tortoisesvn to use a different diffviewer we open settings and select <strong>diff viewer</strong> in the <strong>External Programs</strong> subtree. Select External radiobox.</p>
+<p>Enter this text into the dialog box:</p>
+<p>"C:\Program Files\Sourcegear\DiffMerge\DiffMerge.exe" /t1=mine /t2=theirs %mine %theirs</p>
+<p>Click on <strong>Merge Tool</strong> and select External radiobox. Enter this into the textbox:</p>
+<p>"C:\Program Files\Sourcegear\DiffMerge\DiffMerge.exe" /t1=mine /t2=base /t3=theirs /r=%merged %mine %base %theirs</p>
+<p>Save and close the dialogbox. Fire up a file that was modified to compare and you'll be using Diffmerge instead of tortoisemerge.</p></blockquote>

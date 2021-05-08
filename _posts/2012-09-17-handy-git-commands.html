@@ -1,0 +1,38 @@
+---
+layout: post
+title: Handy Git commands
+date: 2012-09-17 09:42:34.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Programming
+- Web Development
+tags:
+- development
+- git
+- programming
+- workflow
+meta:
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2012-09-17
+    09:43:35";}
+  _edit_last: '517855'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/09/17/handy-git-commands/"
+---
+<p>Its been a while since I've posted but I've been getting to know Git a bit better over the past few weeks in an effort to include it as part of our development process.</p>
+<p>In the meantime however I'm using it to manage my own files and to merge other developer's work into my own work. Here are just a few of the commands that I've found have helped me so far.</p>
+<p>This handy bit lets you compare the differences between two branches with the optional file on the end:<br />
+<code>git diff --name-status [branch_one]..[branch_two] [file_path]</code></p>
+<p>This displays a nice command line base graph of the commits you've made, each commit taking up just one line with the git message appended to the line:<br />
+<code>git log --graph --pretty=oneline --abbrev-commit</code></p>
+<p>After installing kdiff3 and following <a href="http://davesquared.net/2010/03/easier-way-to-set-up-diff-and-merge.html">this handy run through</a> using git difftool is much nicer when going through file diffs with a co-worker (can be done with branches too as above):<br />
+<code>git difftool [commit_one] [commit_two]</code></p>
+<p>I may add some more as I get more and more into Git but at the moment they're the few handy ones I can recall.</p>

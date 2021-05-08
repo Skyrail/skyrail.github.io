@@ -1,0 +1,37 @@
+---
+layout: post
+title: Server specific SSH keys
+date: 2020-04-22 09:52:20.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Internet
+- Linux
+- OSX
+- ssh
+- Windows
+tags: []
+meta:
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _publicize_job_id: '43333708805'
+  timeline_notification: '1587549141'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2020/04/22/server-specific-ssh-keys/"
+---
+<p>Because this has confounded me on multiple occasions and I keep on forgetting to record the solution.</p>
+<p>Whenever I create or add an SSH key to my <code>~/.ssh/</code> folder I name it something more memorable e.g. id_github or id_bitbucket (it's wise to have separate keys for separate public repos like these - means you can revoke access on a per-key basis) - this will sometimes confuse Git, as it won't be able to find the id_rsa file it's used to. As such you need to edit the <code>~/.ssh/config</code> file and add in the servers you'd like to connect to and with which key.</p>
+<p>I added something like the following. Add a separate block per server.</p>
+<pre>Host server.com
+    HostName server.com
+    User UserName
+    IdentityFile ~/.ssh/server_private_key
+</pre>

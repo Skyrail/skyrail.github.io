@@ -1,0 +1,34 @@
+---
+layout: post
+title: Deleting files older than a particular date and deleting more files then rm
+  can handle
+date: 2013-08-15 14:01:28.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Bash
+- Linux
+tags: []
+meta:
+  _edit_last: '517855'
+  geo_public: '0'
+  _publicize_pending: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2013/08/15/deleting-files-older-than-a-particular-date-and-deleting-more-files-then-rm-can-handle/"
+---
+<p>We collect data from clients via a number of methods including FTP. We'd been collecting, but not processing, a particular client's files for a while now accumulating to over 200,000 files in a single folder. </p>
+<p>That's a fair few files and we needed to process them and then remove them, being the go-to-Linux-guy I was tasked with sorting through the files.</p>
+<p>Sadly the version of find we have on the server doesn't have the parameter allowing me to set a date to find files before/after but it does have the ability to pick a reference file:</p>
+<pre><code>find -not -newer ./mb-001.*****.log.csv -delete</code></pre>
+<p>This command finds every file not newer than the reference file, and deletes them, rather quickly too.</p>
+<p>As a side note, even rm had difficulty deleting all the files in another folder (which had 400,000+ files in it) thankfully using find and xargs allowed me to break it up a little:</p>
+<pre><code>find . | xargs -0 rm -f</code></pre>
+<p>Before deleting the files I'd compressed them all down to back them up, went down from 1.6GB to 26MB, even the ls -l file listing was larger than that.</p>

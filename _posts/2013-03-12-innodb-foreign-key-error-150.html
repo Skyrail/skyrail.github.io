@@ -1,0 +1,38 @@
+---
+layout: post
+title: InnoDB Foreign Key Error 150
+date: 2013-03-12 14:52:15.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- SQL
+tags:
+- mysql
+meta:
+  _edit_last: '517855'
+  _publicize_pending: '1'
+  geo_public: '0'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2013/03/12/innodb-foreign-key-error-150/"
+---
+<p>As part of created and modifying the database structure of the various products here at work I've encountered numerous times issues with creating foreign keys. Finally I had a deeper look into what may be causing the problem, despite having (or so I thought) the exact same field types in the tables.</p>
+<p>Using <code>SHOW ENGINE INNODB STATUS;</code> I was able to see more detailed information about the error. And the information was as follows:</p>
+<pre>130312 11:47:36 Error in foreign key constraint of table &lt;database_name&gt;/#sql-3a6_3faa:
+FOREIGN KEY (`customer_code`) REFERENCES `customer` (`customer_code`) ON UPDATE NO ACTION ON DELETE CASCADE:
+Cannot find an index in the referenced table where the
+referenced columns appear as the first columns, or column types
+in the table and the referenced table do not match for constraint.
+Note that the internal storage type of ENUM and SET changed in
+tables created with &gt;= InnoDB-4.1.12, and such columns in old tables
+cannot be referenced by such columns in new tables.
+See http://dev.mysql.com/doc/refman/5.5/en/innodb-foreign-key-constraints.html
+for correct foreign key definition.</pre>
+<p>Which made me realise that I'd not been creating the new tables with the correct collation, utf8_general_ci, which I had been using for all of the previous tables. Even after doing this I was still having problems. Although I didn't realise (I know now), individual columns can have their own collation. It turned out the foreign key field I was trying to link on was different from the one I was linking from. After making this change then the foreign key was created as expected.</p>

@@ -1,0 +1,34 @@
+---
+layout: post
+title: 'Laravel Migrations: Renaming columns in tables with ENUMs'
+date: 2016-05-03 18:42:40.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- PHP
+- Web Development
+tags: []
+meta:
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _publicize_job_id: '22442086510'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2016/05/03/laravel-migrations-renaming-columns-in-tables-with-enums/"
+---
+<p>So in working with Laravel's database migrations feature it appears you can't rename columns in tables which contain enum columns (the issue is noted in their documentation: <code>Note: Renaming columns in a table with a <b>enum</b> column is not currently supported</code> but can be easily missed)</p>
+<p>When you do attempt to migrate it may give you an error as follows:</p>
+<pre>[Doctrine\DBAL\DBALException]                                                                    
+Unknown database type enum requested, Doctrine\DBAL\Platforms\MySqlPlatform may not support it. 
+</pre>
+<p>The quick away around it I found, while retaining data, is to run the raw query using the <code>DB::statement</code> function:</p>
+<pre>DB::statement('ALTER TABLE <i>[table_name]</i> CHANGE <i>[from]</i> <i>[to]</i> <i>[column_definition]</i>'); 
+</pre>
+<p>Just make sure you add the reverse query in the down function!</p>

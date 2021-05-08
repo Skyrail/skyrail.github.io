@@ -1,0 +1,28 @@
+---
+layout: post
+title: Copying one file to multiple destinations on Linux
+date: 2012-11-07 16:11:07.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Linux
+tags:
+- linux
+- systems administration
+- ubuntu
+meta:
+  _publicize_pending: '1'
+  _edit_last: '517855'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/11/07/copying-one-file-to-multiple-destinations-on-linux/"
+---
+<p>I find myself having to copy a single file to a number of destinations fairly regularly and I found this handy snippet in this useful <a href="http://stackoverflow.com/a/195972/833660">Stackoverflow answer</a>.</p>
+<pre><code>echo dir1 dir2 dir3 | xargs -n 1 cp file1</code></pre>

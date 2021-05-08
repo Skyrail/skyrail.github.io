@@ -1,0 +1,33 @@
+---
+layout: post
+title: Unicode error in Python when trying to open a file on Windows
+date: 2011-11-06 20:35:32.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Programming
+- Python
+- Windows
+tags:
+- python
+- windows
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2011-11-06
+    20:35:32";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2011/11/06/unicode-error-in-python-when-trying-to-open-a-file-on-windows/"
+---
+<p>When trying to open a file on Windows using Python's open() function I came across a little error that wouldn't allow me to open the file. The error was as follows:</p>
+<p><code>SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 2-4: truncated \UXXXXXXXX escape</code></p>
+<p>It turned out the file path I was using (<code>C:\Users\......\SWAN\A1PelamisWave</code>) has a couple of \U's in it which apparently represents a unicode escape. To resolve this I placed an 'r' in front of the file string as follows:</p>
+<p><code>file = open(r'C:\Users\......\SWAN\A1PelamisWave', 'r');</code></p>
+<p>This causes Python to treat it as a raw string. The answer was found in this helpful <a href="http://stackoverflow.com/questions/1347791/unicode-error-unicodeescape-codec-cant-decode-bytes-cannot-open-text-file">StackOverflow post</a>.</p>

@@ -1,0 +1,49 @@
+---
+layout: post
+title: chmod equals (=) sign?
+date: 2014-09-14 19:30:10.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- An Introduction to
+- Linux
+tags:
+- linux
+meta:
+  _wpas_skip_facebook: '1'
+  _wpas_skip_google_plus: '1'
+  _wpas_skip_twitter: '1'
+  _wpas_skip_linkedin: '1'
+  _wpas_skip_tumblr: '1'
+  _wpas_skip_path: '1'
+  _publicize_pending: '1'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2014/09/14/chmod-equals-sign/"
+---
+<p>So while setting up postfix I came across the following command</p>
+<pre>chmod o= /etc/postfix/mysql-virtual_*.cf 
+</pre>
+<p>And I realised I'd not come across the equals (=) operator in the chmod command before. So here's a quick run down of what it's used for.</p>
+<p>The command format is as follows:</p>
+<pre>chmod u=rwx,g=rwx,o=rwx [file]</pre>
+<p>Either of the equals groups is optional e.g. if you just want to set the permissions for the file's 'group':</p>
+<pre>chmod g=rwx [file]</pre>
+<p>And you don't have to provide all of the permssions e.g. if you only want to give the file's 'user' (owner) read permissions:</p>
+<pre>chmod u=r [file]</pre>
+<p>To remove the permissions from an entity either leave it blank or add three dashes:</p>
+<pre>chmod u=--- [file]</pre>
+<p>or</p>
+<pre>chmod u= [file]</pre>
+<p>You can also enter partial permission:</p>
+<pre>chmod o=rx [file]</pre>
+<p>Saves having to remember the octal syntax each time (still, it's good to learn that too!)</p>

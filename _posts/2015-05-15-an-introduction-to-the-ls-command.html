@@ -1,0 +1,68 @@
+---
+layout: post
+title: 'An introduction to: The ''ls'' command'
+date: 2015-05-15 07:06:05.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- An Introduction to
+- Bash
+- Linux
+tags: []
+meta:
+  _publicize_pending: '1'
+  _edit_last: '517855'
+  geo_public: '0'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2015/05/15/an-introduction-to-the-ls-command/"
+---
+<p><strong>The Basics</strong><br />
+The <code>ls</code>, or listing, command will list all of the 'visible' files in a directory by default e.g.</p>
+<pre>[22:29] centos:~:$ ls
+setup.sh  test_dir  workspace</pre>
+<p>Adding the <code>-l</code> flag will provide a long vertical listing similar to a typical GUI file explorer, showing the user and group the files belong to, the permissions for each, size and last updated time:</p>
+<pre>[22:31] centos:~:$ ls -l
+total 4
+-rwxrwxr-x. 1 centos centos 604 May  5 17:05 setup.sh
+drwxrwsr-x. 2 centos root    32 Apr 29 11:23 test_dir
+drwxrwxr-x. 5 centos centos  52 May 13 22:18 workspace</pre>
+<p><i><strong>Quick tip:</strong> Use the <code>-h</code>/<code>--human-readable</code> flag for 'human readable' file sizes i.e. convert them into KB/MB/GB/etc. rather than bytes.</i></p>
+<p>Earlier I mentioned that by default the <code>ls</code> command will only list 'visible' files. On Linux any file beginning with a dot (.) will be hidden from this listing. By appending the <code>-a</code> flag it will list all of the dot files too.</p>
+<pre>[22:33] centos:~:$ ls -a
+.  ..  .bash_history  .bash_logout  .bash_profile  
+.bashrc  .gitconfig  .pki  setup.sh  .ssh  test_dir  
+.tmux  .vim  .viminfo  .vimrc  .weechat  workspace</pre>
+<p><strong>Extras</strong><br />
+There's a whole raft of arguments available to the <code>ls</code> command, all of which can be found on the <code>man</code> page. Here are a few that I've found helpful. </p>
+<p><strong>The <code>--group-directories-first</code> flag:</strong> This flag will group all directories in the listing first, and then list the files, notice the difference between these two:</p>
+<pre>[22:29] centos:~:$ ls -l --group-directories-first
+total 4
+drwxrwsr-x. 2 centos root    32 Apr 29 11:23 <strong>test_dir</strong>
+drwxrwxr-x. 5 centos centos  52 May 13 22:18 <strong>workspace</strong>
+-rwxrwxr-x. 1 centos centos 604 May  5 17:05 setup.sh
+[22:29] centos:~:$ ls -l
+total 4
+-rwxrwxr-x. 1 centos centos 604 May  5 17:05 setup.sh
+drwxrwsr-x. 2 centos root    32 Apr 29 11:23 <strong>test_dir</strong>
+drwxrwxr-x. 5 centos centos  52 May 13 22:18 <strong>workspace</strong>
+</pre>
+<p><strong>Creating aliases:</strong> Aliases can be really useful for defaulting some of the above arguments if you use them regularly. A number of Linux distributions will provide some default aliases using <code>ls</code> e.g.</p>
+<pre>[22:22] centos:~:$ alias
+alias l.='ls -d .* --color=auto'
+alias ll='ls -l --color=auto'
+alias ls='ls --color=auto'
+</pre>
+<p>It's easy to set your own, running the following will set a temporary alias, add it to your .bashrc file to make it permanent:</p>
+<pre>alias lsd='ls --group-directories-first --color=auto -lah'</pre>
+<p>Now typing <code>lsd</code> into the command line will execute the above <code>ls</code> command with the listed parameters</p>
+<p>There's a number of other arguments, too minor for their own little section, but could definitely be helpful if you want to use <code>ls</code> in your shell scripts. For example the <code>-Q</code> flag will quote all of the entries, which can help with files/directories with spaces in; various sorting flags (sort by modified time, created time, name etc.); different display methods (horizontally [default], long list, single column, comma separated etc.), and many more. Dig into the <code>man</code> pages to find out more!</p>
+<p>Overall a simple command, so an easy introduction to begin with.</p>
+<p><i><strong>Quick tip:</strong> You can view the basic specification of my setup in <a href="https://skyrail.wordpress.com/2015/05/13/an-introduction-to-environment-setup/" title="An introduction to: environment setup">this post here</a>.</i></p>

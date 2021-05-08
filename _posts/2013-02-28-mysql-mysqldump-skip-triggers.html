@@ -1,0 +1,27 @@
+---
+layout: post
+title: MySQL mysqldump --skip-triggers
+date: 2013-02-28 10:20:35.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- SQL
+tags:
+- mysql
+meta:
+  _edit_last: '517855'
+  _publicize_pending: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2013/02/28/mysql-mysqldump-skip-triggers/"
+---
+<p>In the event of exporting data from one database to another, even if you only export select tables using the --tables option, be sure to add --skip-triggers as well if you don't need them.</p>
+<p>We use triggers to duplicate data between our demo databases but one of the triggers broke, breaking all the databases. After fixing the issue and re-importing all of the data from the main demo database we thought it had been fixed. I had forgotten to put in the --skip-triggers option though, so the triggers in the main demo database copied to all the sub-demo databases, creating a recursive loop. Lesson learned.</p>
+<p>The error we were getting, just to note, was "Can't update table '&lt;table&gt;' in stored function/trigger because it is already used by statement which invoked this stored function/trigger." and caused a whole chain of databases to fail.</p>

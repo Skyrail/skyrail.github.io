@@ -1,0 +1,28 @@
+---
+layout: post
+title: 'MySQL error code 121: Duplicate key on write or update'
+date: 2012-07-16 11:01:33.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Programming
+- SQL
+tags: []
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2012-07-16
+    11:01:33";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/07/16/mysql-error-code-121-duplicate-key-on-write-or-update/"
+---
+<p>Recently I received the following error while trying to create a table:</p>
+<pre>MySQL error code 121: Duplicate key on write or update</pre>
+<p>After a bit of research I discovered that the problem was that I had two foreign keys with the same name in the database. Rename one of them and then you're sorted!</p>

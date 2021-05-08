@@ -1,0 +1,54 @@
+---
+layout: post
+title: Working around cross-origin issues with iFrames
+date: 2016-04-26 14:15:09.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Javascript
+- Web Development
+tags: []
+meta:
+  _edit_last: '517855'
+  geo_public: '0'
+  _publicize_job_id: '22186080299'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2016/04/26/working-around-cross-origin-issues-with-iframes/"
+---
+<p>While working on an internal system I was using an iFrame to load a web page from a different domain from the one the it was sat on (e.g. parent page: website-one.com, iFrame: website-two.co.uk) As development continued it became clear the parent page needed to interact with the iFrame page, and vice-versa.</p>
+<p>After some testing and a bit of research it was clear that this wouldn't easily work due to browser's same-origin policies - an understandable security mechanism (<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">see Mozilla's page on it here</a>)</p>
+<p>There are a couple of ways around this, the I started with a proxy page through which all of the iFrame pages would be loaded through (<a href="http://benalman.com/projects/php-simple-proxy/">based on Ben Alman's simple PHP proxy</a>) - this proved to be troublesome as we were loading resources from all over the place and of many different types so the idea was quickly scrapped.</p>
+<p>After some more research I settled on the JavaScript '<code>.postMessage()</code>' model. Although it was essentially a basic client-server model it suited our needs and worked wonders. Here's a quick run down:</p>
+<p>First step is sending data from the parent (website-one.com) to the child (website-two.co.uk)</p>
+<pre>var iframe = document.getElementById('iframe-id').contentWindow;
+
+iframe.postMessage({ data: 'data here' }, 'http://website-two.co.uk');
+</pre>
+<p>Next is listening for this message on the child page</p>
+<pre>function processMessage(message) {
+
+    // Filter out messages from other origins
+    if (message.origin !== 'website-one.com') {
+        return;
+    }
+
+    console.log(message.data);
+}
+
+window.addEventListener('message', processMessage, false);
+</pre>
+<p>In this case the function will post a message to the console of 'data here' (as per our request). You can listen out for whatever message you want and process it as you like.</p>
+<p>Sending data back to the parent is just as simple</p>
+<pre>parent.postMessage({ data: 'return data!'}, 'http://website-one.com');
+</pre>
+<p>Although the parent web page will also require a listener to receive the data.</p>
+<p>It does require more work than just directly interacting with the iFrame from the parent page but I've found it to work a treat for our use case - particularly as there are so few alternatives!</p>
+<p><i><strong>Quick tip:</strong> when using jQuery you can access the iFrame as follows: <code>$('#iframe-id')[0].contentWindow</code></i></p>

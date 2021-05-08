@@ -1,0 +1,37 @@
+---
+layout: post
+title: 'php-fpm and nginx: session_start() failed: No such file or directory'
+date: 2015-01-10 12:13:54.000000000 +00:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Linux
+- Operating Systems
+- PHP
+tags: []
+meta:
+  _edit_last: '517855'
+  geo_public: '0'
+  _publicize_pending: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2015/01/10/php-fpm-and-nginx-session_start-failed-no-such-file-or-directory/"
+---
+<p>In setting up nginx and php-fpm I uninstalled Apache (httpd) and in turn that uninstalled the standard php package that Apache uses.</p>
+<p>In doing so this deleted some files in the /var/lib/php folder including the session folder (/var/lib/php/session). While logging into phpmyadmin it threw an error complaining about the missing folder.</p>
+<p>It's a simple fix, replace the session folder, making sure that the php-fpm process can read and write to it.</p>
+<p>I had changed the user php-fpm runs as from apache to nginx to match the nginx user. This can be done in the <code>/etc/php-fpm.d/www.conf</code> file.</p>
+<p>Once that's done I ran the following to make it writable/readable by the nginx user.</p>
+<pre>
+# cd /var/lib/php
+# mkdir session
+# chown root:nginx session/
+# chmod 770 session/
+</pre>

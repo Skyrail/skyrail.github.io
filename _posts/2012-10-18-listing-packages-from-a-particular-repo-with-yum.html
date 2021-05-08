@@ -1,0 +1,31 @@
+---
+layout: post
+title: Listing packages from a particular repo with Yum
+date: 2012-10-18 12:00:04.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Linux
+- Operating Systems
+tags:
+- centos
+- linux
+meta:
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2012-10-18
+    12:00:04";}
+  _edit_last: '517855'
+  _publicize_pending: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/10/18/listing-packages-from-a-particular-repo-with-yum/"
+---
+<p>A lovely 'one liner' for printing out all the packages from a particular repo in Yum. Very handy if you want to uninstall all from one to reinstall from another.<br />
+<code>rpm -qa --qf "%{NAME} %{VENDOR} \n" | grep "&lt;VENDOR_NAME_HERE&gt;" | cut -d ' '<i> -f 1 | sort</i></code></p>
+<p>Taken from <a href="http://lists.centos.org/pipermail/centos/2010-September/099152.html">this post</a> on one of the CentOS mailing lists.</p>

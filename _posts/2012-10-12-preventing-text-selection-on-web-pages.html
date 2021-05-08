@@ -1,0 +1,38 @@
+---
+layout: post
+title: Preventing text selection on web-pages
+date: 2012-10-12 09:44:51.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Web Development
+tags:
+- css
+- development
+- html
+- programming
+meta:
+  _publicize_pending: '1'
+  _edit_last: '517855'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2012/10/12/preventing-text-selection-on-web-pages/"
+---
+<p>Now I'm by no means an advocate for 'faux-DRM text protection' but if I want a HTML element to have a click or double click event, I don't want the text in it to be selected as well, which is where this bit of CSS comes in handy:</p>
+<p><code><br />
+.prevent_selection<br />
+{<br />
+-moz-user-select: none; /* mozilla browsers */<br />
+-khtml-user-select: none; /* webkit konqueror browsers */<br />
+-webkit-user-select:none; /* webkit chrome, safari browsers */<br />
+-ms-user-select: none; /* IE10+ browsers */<br />
+}<br />
+</code></p>
+<p>Obviously this doesn't work for IE9 and below, so it's probably a good idea to use a Javascript implementation if you anticipate supporting Internet Explorer users.</p>

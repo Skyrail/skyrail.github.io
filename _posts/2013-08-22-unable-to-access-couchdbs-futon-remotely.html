@@ -1,0 +1,36 @@
+---
+layout: post
+title: Unable to access CouchDB's Futon remotely
+date: 2013-08-22 10:53:37.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Databases
+- Linux
+tags: []
+meta:
+  _edit_last: '517855'
+  _publicize_pending: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2013/08/22/unable-to-access-couchdbs-futon-remotely/"
+---
+<p>I'd set up CouchDB on one of my development servers to play around with. Part of that involved messing with Futon, which is CouchDB's web interface. For some reason however I was unable to access the interface from my local machine. </p>
+<p>Running <code>netstat -an | grep 5984</code> showed CouchDB to be bound to <code>127.0.0.1:5984</code>, therefore I couldn't access it remotely. After changing that configuration setting (in local.ini) and CouchDB I was still unable to access it.</p>
+<p>It turns out that until you stop/kill the Erlang process that CouchDB runs on, it won't reload the config file.</p>
+<p>To achieve that:</p>
+<p>Find the process number that Erlang/Beam is running on</p>
+<pre><code>ps ax | grep beam</code></pre>
+<p>Kill the process</p>
+<pre><code>kill PID_HERE</code></pre>
+<p>Restart CouchDB</p>
+<pre><code>/etc/init.d/couchdb restart</code></pre>
+<p>And it should now have reloaded your config file.</p>
+<p>Answer initially found from <a href="http://serverfault.com/questions/79453/why-cant-i-access-my-couchdb-instance-externally-on-ubuntu-9-04-server">this StackOverflow Question</a>.</p>

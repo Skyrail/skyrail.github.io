@@ -1,0 +1,38 @@
+---
+layout: post
+title: Difference between adduser and useradd?
+date: 2014-10-03 07:37:41.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- An Introduction to
+- Linux
+tags:
+- linux
+meta:
+  _oembed_21fd95bdf58d83bee1f11aa9f6e22966: "{{unknown}}"
+  _publicize_pending: '1'
+  _rest_api_published: '1'
+  _rest_api_client_id: "-1"
+  _wpas_skip_facebook: '1'
+  _wpas_skip_google_plus: '1'
+  _wpas_skip_twitter: '1'
+  _wpas_skip_linkedin: '1'
+  _wpas_skip_tumblr: '1'
+  _wpas_skip_path: '1'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2014/10/03/difference-between-adduser-and-useradd/"
+---
+<p>For future reference as I usually forget myself, the difference between the two is quite simple as <a href="http://superuser.com/a/547973">this</a> SuperUser post puts it:</p>
+<blockquote><p><code>useradd</code> is native binary compiled with the system. But, <code>adduser</code> is a perl script which uses <code>useradd</code> binary in back-end.</p>
+<p><code>adduser</code> is more user friendly and interactive than its back-end <code>useradd</code>. There's no difference in features provided.</p></blockquote>
+<p>Found here: <a href="http://superuser.com/a/547973">http://superuser.com/a/547973</a>.</p>
+<p>You'll find on some systems that the <code>adduser</code> will give you prompts for adding extra information.</p>

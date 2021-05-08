@@ -1,0 +1,27 @@
+---
+layout: post
+title: Viewport Meta Tag
+date: 2015-05-26 13:39:43.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Web Development
+tags: []
+meta:
+  _edit_last: '517855'
+  geo_public: '0'
+  _publicize_job_id: '22185251138'
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2015/05/26/viewport-meta-tag/"
+---
+<p>This has been driving me mad for a few days now, on a couple of different websites. It's such a simple thing to miss, but doing so has meant the sites haven't 'acted' responsively - causing them to display incorrectly on phones. It's simple this:</p>
+<pre> &lt;meta <span class="html-attribute-name">name</span>="<span class="html-attribute-value">viewport</span>" <span class="html-attribute-name">content</span>="<span class="html-attribute-value">width=device-width,initial-scale=1.0</span>"&gt;</pre>
+<p>Granted it should usually be included in your boilerplate or setup code but if it's missed off it can cause frustrations down the line. Add it between your 'head' tags and things will scale properly without looking 'zoomed out' on mobile devices.</p>

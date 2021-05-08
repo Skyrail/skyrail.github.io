@@ -1,0 +1,37 @@
+---
+layout: post
+title: 10 Simple ways to reduce and prevent bugs in your software
+date: 2011-07-19 14:03:16.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Programming
+tags: []
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2011-07-19
+    14:03:16";}
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2011/07/19/10-simple-ways-to-reduce-and-prevent-bugs-in-your-software/"
+---
+<p>Taken from<a href="http://stackoverflow.com/questions/1544642/what-is-your-most-useful-technique-for-finding-or-preventing-bugs/1544652#1544652"> this StackOverflow comment</a>:</p>
+<ol>
+<li>Thinking before coding</li>
+<li>Fixing bugs or <em>potential for bugs</em> as soon as I see one (not leave it for tomorrow)</li>
+<li>Test each little piece of functionality that makes sense on its own</li>
+<li>Have it as principle to avoid quick hacks</li>
+<li>Use defensive programming techniques everywhere where possible (immutable objects, read-only properties, type constraints etc.)</li>
+<li>Write self-explanatory code and comments where code may seem not easy to understand</li>
+<li>Avoid sophisticated expressions that require a very fresh state of mind to comprehend</li>
+<li>Avoid dense blurbs of code, better make it more verbose to avoid misunderstanding (not saving a few characters on code block brackets helps greatly)</li>
+<li>Avoid duplication of code. It will be later next to impossible to trace all instances.</li>
+<li>Avoid magic constants in code. Even if you're 200% sure you'll only need it in one place, extract it to a constant. Will do you good.</li>
+</ol>

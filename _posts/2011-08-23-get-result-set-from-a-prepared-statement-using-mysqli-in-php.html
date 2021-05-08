@@ -1,0 +1,35 @@
+---
+layout: post
+title: Get result set from a prepared statement using MySQLi in PHP
+date: 2011-08-23 13:54:32.000000000 +01:00
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- PHP
+- Web Development
+tags: []
+meta:
+  _edit_last: '517855'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";s:1:"0";s:6:"author";s:6:"517855";s:7:"blog_id";s:6:"535078";s:9:"mod_stamp";s:19:"2011-08-23
+    13:54:58";}
+  _oembed_1edab77ac0b88f4701a5fef22b7dcb48: "{{unknown}}"
+author:
+  login: skyrail
+  email: aled.skyrail@gmail.com
+  display_name: Skyrail
+  first_name: ''
+  last_name: ''
+permalink: "/2011/08/23/get-result-set-from-a-prepared-statement-using-mysqli-in-php/"
+---
+<p>I had to go over this dozens of times before I found out a decent solution. When you use a prepared statement it's a bit of a mess trying to get an array of results from the result akin to $result-&gt;fetch_all(); So here's what I found:</p>
+<p>[code]</p>
+<p>$query = $mysqli-&gt;prepare(&quot;SELECT * FROM `table`&quot;);</p>
+<p>$query-&gt;execute();</p>
+<p>$result = $query-&gt;get_result();</p>
+<p>$resultArray = $result-&gt;fetch_assoc();<br />
+[/code]</p>
+<p>Use the get_result() method to get a result object from the statement object and then you can use the typical methods associated with the MySQLi result object.</p>
+<p>See: <a href="http://uk.php.net/manual/en/mysqli-stmt.get-result.php">http://uk.php.net/manual/en/mysqli-stmt.get-result.php</a></p>
