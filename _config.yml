@@ -2,15 +2,15 @@
 #
 # This is the configuration file for your blog, please change these items after forked.
 
-title: Your title
-email: your-email@example.com
-name: Your name
+title: a rail in the sky 
+email: aled@redpointnetwork.co.uk
+name: Aled Parry
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here.
-keywords: [Your keywords]
+  
+keywords: [programming]
 baseurl: '' # the subpath of your site, e.g. /`blog
-url: '' # the base hostname & protocol for your site, e.g. http://example.com
-domain: 'example.com' # the domain name for your site, e.g. example.com
+url: 'https://skyrail.github.io' # the base hostname & protocol for your site, e.g. http://example.com
+domain: 'skyrail.github.io' # the domain name for your site, e.g. example.com
 language: en
 # Supported languages list:
 # en: English
@@ -27,10 +27,10 @@ analytics: # the Google Analytics property ID, e.g. UA-XXXXX-Y
 comments: false # enable comments
 disqus: # disqus account
 
-mathjax: true # Math support
-diagram: true # Diagrams support
+mathjax: false # Math support
+diagram: false # Diagrams support
 
-paginate: 25
+paginate: 20
 paginate_path: '/page:num/'
 
 permalink: /:year/:month/:day/:title
