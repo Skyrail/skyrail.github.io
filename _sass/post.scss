@@ -5,6 +5,11 @@
   margin: 1rem 0;
 }
 
+.post-content {
+  // scrollable for mobile devices
+  overflow-x: scroll;
+}
+
 .post-content p {
   line-height: 20px;
 }
