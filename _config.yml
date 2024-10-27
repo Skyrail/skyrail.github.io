@@ -29,7 +29,7 @@ comments: false # enable comments
 disqus: # disqus account
 
 mathjax: false # Math support
-diagram: false # Diagrams support
+diagram: true # Diagrams support
 
 paginate: 15
 paginate_path: '/page:num/'
