@@ -1,0 +1,140 @@
+---
+layout: post
+title:  "an introduction to - haproxy"
+date:   2024-10-27
+last_modified_at: 2024-10-27
+categories: [an introduction to]
+---
+
+Picking up where I left off almost 10 years ago I am continuing to use the '[An introduction to](https://skyrail.github.io/2015/05/13/an-introduction-to-a-new-series/)' series as a means to prompt myself to learn some more topics. In this particular post I'm going to focus on setting up and running HAProxy.
+
+### Loadbalancing and HAProxy
+
+[HAProxy](https://www.haproxy.org/) (H-A-Proxy) is a free and open source load-balancing reverse-proxy. There is an enterprise version but this focuses on the community edition which is freely available.
+
+Load balancers do what they say on the tin and balance traffic between multiple backend services. HAProxy can balance TCP connections, and offers extra features for HTTP connections. It does not support UDP. 
+
+### Installation
+
+I'm installing on Amazon Linux 2023 on EC2 as that's what I work with day-today and I would like to focus on HAProxy, not the underlying system, at this point.
+
+```bash
+dnf install -y haproxy
+```
+
+Which (currently) installs [HAProxy 2.8.*](http://docs.haproxy.org/2.8/intro.html) which is an LTS version.
+
+For my backends I shall be using a couple of t2.micro instances that are running Apache (see below for setup information) - again the underlying system doesn't matter it just provides a quick base to work from. You can run this all on one instance if you wish, running off different ports.
+
+I am using an AWS ElasticIP as my public endpoint. All other IPs will be internal to the VPC. I'm using `haproxy.redpointnetwork.co.uk` as the IPv4 hostname.
+
+## General configuration
+
+The HAProxy configuration is kept in `/etc/haproxy` with the default/core config being kept in `haproxy.cfg` and furhter configuration can be added to the `conf.d` folder.
+
+For simplicity I'm going to build on the default config, but replace the relevant sections as I go. HAProxy will need restarting after configuration changes (using `systemctl restart haproxy`)
+
+### Proxy modes
+
+HAProxy can operate as either a general TCP (layer 4) proxy or a HTTP (layer 7) specific proxy. In the former it will forward traffic between the client and the backend, in the latter HAProxy can
+
+### Frontends
+
+Frontends are listening sockets that accept connections from clients. To start we define the front end block with a port
+
+```haproxy
+frontend main
+  bind *:80
+```
+
+Trying `haproxy.redpointnetwork.co.uk` at this point gives a `503 Service Unavailable` error - that's a good sign, it means HAProxy is running. In order to process traffic we need to hand connections off to a backend.
+
+### Backends
+
+Backends list the servers to which HAProxy can forward requests to.
+
+```haproxy
+frontend main
+  bind *:80
+  default_backend web
+
+backend web
+  server web01 172.31.42.111:80 check
+```
+
+Here we create a new `backend` block and we modify the existing `frontend` block.
+
+The `check` parameter in the backend means HAProxy will check the health of the backend and will take it out of service. If we stop `httpd` on web01 then HAProxy will return a 503 error - starting `httpd` again it will return to service requests.
+
+### Loadbalancing
+
+We have one web server servicing requests from one load balancer - not particularly highly available.
+
+First we need to add a second server to the `web` backend and then we need to tell the backend how to balance requests between the servers. We'll start with the simplest - round-robin. I won't cover all of the other algorithms (of which there are 11 - you can [view them here](http://docs.haproxy.org/2.8/configuration.html#4.2-balance)) but some of the ones I find relevant/interesting.
+
+#### Round-robin
+
+With round-robin balancing, each server is used in turn.
+
+```haproxy
+backend web
+  balance  roundrobin
+  server   web01 172.31.42.111:80 check
+  server   web02 172.31.29.202:80 check
+```
+
+Only the `backend` block needs editing at this point - adding the second web server and a `balance` configuration set to round-robin. Testing the endpoint now will flip between the two web-servers - each serving a request at a time.
+
+You can weight requests to particular services using the [`weight`](http://docs.haproxy.org/2.8/configuration.html#5.2-weight) parameter with each `server` configuration. For example the following configuration:
+
+```haproxy
+backend web
+  balance  roundrobin
+  server   web01 172.31.42.111:80 check weight 10
+  server   web02 172.31.29.202:80 check weight 20
+```
+
+The server `web01` will serve 1 request, and then the server `web02` will serve 2 requests before returning to `web01`. If you have different sized servers this will allow you to distribute the traffic accordingly.
+
+#### Sticky sessions
+
+### SSL & TLS
+
+#### SSL Termination
+
+#### SSL Passthrough
+
+### Error handling
+
+#### Rate limiting
+
+## Deployment
+
+### High availability
+
+#### Keepalived
+#### Active/Passive
+#### Active/Active
+
+### Monitoring and logging
+
+#### Logging
+
+#### Monitoring
+
+
+### Apache setup
+
+Really simple - again, Amazon Linux 2023. Install Apache (`dnf install -y httpd`). Create an index.html file in `/var/www/html/` so we can distinguish between the two. Start Apache `systemctl start httpd`.
+
+I'm going to be moving my Wordpress blog ([found here][old-blog]) to Github Pages.
+
+Although it's a static blog (based on the [Jekyll Paper][jekyll-paper-website] using [Jekyll][jekyll-website]) I believe it'll give me greater freedom, including control of ads, faster loading speeds, control of content etc.
+
+I also feel like it's a nice time to transition as I move back into the world of software development.
+
+It'll typically be a place where I can post snippets and thoughts - a sort of out-of-memory-memory-bank. Don't expect revelationary content, but hopefully you'll find some bits as helpful as I did.
+
+[old-blog]: https://skyrail.wordpress.com
+[jekyll-paper-website]: https://github.com/ghosind/Jekyll-Paper
+[jekyll-website]: https://jekyllrb.com/
