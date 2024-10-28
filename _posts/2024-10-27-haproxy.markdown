@@ -98,15 +98,34 @@ The server `web01` will serve 1 request, and then the server `web02` will serve 
 
 #### Sticky sessions
 
+Sometimes you want requests from each client to return back to the same server. This can be done in a couple of ways depending on what attribute you would like identify clients by. Examples include:
+
+* `uri` - via the URI (either the part to the left of the query string or the URI as a whole)
+* `url_param` - via a specific parameter (in the query string or POST body)
+* `hdr` - identify by HTTP headers
+* `hash` - identify by the hash of a particular attribute
+
+#### Others
+
+Other balance types I've not spoken about because I've focused on HTTP-based load-balancing but are still interesting:
+
+* `leastconn` - good for longer-lived connections, sends connections to the server with the least open connections.
+
 ### SSL & TLS
 
 #### SSL Termination
+
+HAProxy can be used to reduce load on the backend servers by offloading SSL/TLS termination onto HAProxy itself. Choosing to do so is based on your risk assessment as the traffic within the internal network will then be unencrypted.
+
+
+
+##### Mutual TLS
 
 #### SSL Passthrough
 
 ### Error handling
 
-#### Rate limiting
+#### Rate limiting
 
 ## Deployment
 
